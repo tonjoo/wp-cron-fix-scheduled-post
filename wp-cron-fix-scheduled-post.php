@@ -18,7 +18,7 @@ defined( 'WPINC' ) OR exit;
 register_activation_hook(__FILE__, 'wp_cron_fix_scheduled_post_active');
 
 function wp_cron_fix_scheduled_post_active() {
-	wp_schedule_event(time(), 'wp_fsp_add_custom_cron_intervals_ten_minutes', 'wp_cron_fix_scheduled_post');
+	wp_schedule_event(time(), 'wp_fsp_add_custom_cron_intervals_five_minutes', 'wp_cron_fix_scheduled_post');
 }
 
 register_deactivation_hook(__FILE__, 'wp_cron_fix_scheduled_post_deactive');
@@ -29,9 +29,9 @@ function wp_cron_fix_scheduled_post_deactive() {
 
 
 
-add_action('init','tests');;
+add_action('init','wp_cron_fix_scheduled_post_init');;
 
-function tests() {
+function wp_cron_fix_scheduled_post_init() {
 	
 	add_action('wp_cron_fix_scheduled_post', 'wp_cron_fix_scheduled_post_do');
 	
@@ -42,12 +42,12 @@ function wp_cron_fix_scheduled_post_do()
 	/*
 	 * Bail if needed
 	 */
-	$wp_cron_fix_scheduled_missed = get_transient( 'wp_cron_fix_scheduled_missed' );
+	$wp_cron_fix_scheduled_missed = get_transient( 'wp_cron_fix_scheduled_missed_timeout' );
 
-	if ( ( $wp_cron_fix_scheduled_missed !== false ) && ( $wp_cron_fix_scheduled_missed > ( time() - ( 400 ) ) ) )
+	if ( ( $wp_cron_fix_scheduled_missed !== false ) && ( $wp_cron_fix_scheduled_missed > ( time() - ( 200 ) ) ) )
 		return;
 
-	set_transient( 'wp_cron_fix_scheduled_missed', $wp_cron_fix_scheduled_missed, 400 );
+	set_transient( 'wp_cron_fix_scheduled_missed_timeout',  time(), 200 );
 
 	global $wpdb;
 
@@ -74,9 +74,9 @@ add_filter( 'cron_schedules', 'wp_cfsp_add_custom_cron_intervals', 10, 1 );
 
 function wp_cfsp_add_custom_cron_intervals( $schedules ) {
 	// $schedules stores all recurrence schedules within WordPress
-	$schedules['wp_fsp_add_custom_cron_intervals_ten_minutes'] = array(
-		'interval'	=> 600,	// Number of seconds, 600 in 10 minutes
-		'display'	=> 'Once Every 10 Minutes'
+	$schedules['wp_fsp_add_custom_cron_intervals_five_minutes'] = array(
+		'interval'	=> 300,	// Number of seconds, 600 in 10 minutes
+		'display'	=> 'Once Every 5 Minutes'
 	);
 
 	// Return our newly added schedule to be merged into the others
