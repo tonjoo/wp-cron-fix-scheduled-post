@@ -44,10 +44,10 @@ function wp_cron_fix_scheduled_post_do()
 	 */
 	$wp_cron_fix_scheduled_missed = get_transient( 'wp_cron_fix_scheduled_missed' );
 
-	if ( ( $wp_cron_fix_scheduled_missed !== false ) && ( $wp_cron_fix_scheduled_missed > ( time() - ( 600 ) ) ) )
+	if ( ( $wp_cron_fix_scheduled_missed !== false ) && ( $wp_cron_fix_scheduled_missed > ( time() - ( 400 ) ) ) )
 		return;
 
-	set_transient( 'wp_cron_fix_scheduled_missed', $wp_cron_fix_scheduled_missed, 600 );
+	set_transient( 'wp_cron_fix_scheduled_missed', $wp_cron_fix_scheduled_missed, 400 );
 
 	global $wpdb;
 
