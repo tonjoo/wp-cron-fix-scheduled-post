@@ -1,8 +1,8 @@
 <?php 
 /*
  * Plugin Name: WP cron fix scheduled post
- * Plugin URI: https://tonjoo.com/product/wp-missed-schedule/
- * Description: Fix wordpress scheduled post using cron job ( You must have real wp-cron installed ! or using our service [free] )
+ * Plugin URI: https://tonjoo.com/product/wp-cron-fix-scheduled-post/
+ * Description: Fix wordpress scheduled post using cron job ,based on https://wordpress.org/plugins/wp-missed-schedule/
  * Author: Tonjoo Studio
  * Author URI: https://tonjoostudio.com
  * Version: 1.0.0
