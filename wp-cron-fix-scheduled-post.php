@@ -111,23 +111,10 @@ function wp_cron_fix_scheduled_post_do_log( $message = false ) {
 	    WP_Filesystem();
 	}
 
-	// if(!$wp_filesystem->put_contents( $path, $css, 0644) ) {
-	    // return __('Failed to create css file');
-	// }
-
-	// if (false === ($creds = request_filesystem_credentials($url, '', false, $dir, null) ) ) {
-	//     echo "Could not create filesystem credentials";
-	//     return;
-	// }
-
-	// if ( ! WP_Filesystem($creds) ) {
-	//     request_filesystem_credentials($url, '', true, $dir, null);
-	//     echo "Filesystem credentials were not available";
-	//     return;
-	// }
-
-	//@todo if size > 1mb then create new file
 	$text = $wp_filesystem->get_contents($dir.'log.txt');
+
+	if(strlen($text)>= 20000 )
+		$text = "";
 
 	$message = "[".current_time( 'mysql' )."] ".$message;
 
