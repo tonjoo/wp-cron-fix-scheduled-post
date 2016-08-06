@@ -99,8 +99,6 @@ function wp_cron_fix_scheduled_post_do_log( $message = false ) {
 
 	global $wp_filesystem;
 
-	$url = wp_nonce_url('plugins.php');
-
 	$dir = plugin_dir_path( __FILE__ );
 
 	global $wp_filesystem;
