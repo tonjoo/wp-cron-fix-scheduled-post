@@ -81,7 +81,7 @@ add_filter( 'cron_schedules', 'wp_cfsp_add_custom_cron_intervals', 10, 1 );
 function wp_cfsp_add_custom_cron_intervals( $schedules ) {
 	// $schedules stores all recurrence schedules within WordPress
 	$schedules['wp_fsp_add_custom_cron_intervals_five_minutes'] = array(
-		'interval'	=> 30,	// Number of seconds
+		'interval'	=> 300,	// Number of seconds
 		'display'	=> 'Once Every 5 Minutes'
 	);
 
